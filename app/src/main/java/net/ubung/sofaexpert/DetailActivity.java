@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class DetailActivity extends AppCompatActivity {
 
     @Override
@@ -25,5 +27,8 @@ public class DetailActivity extends AppCompatActivity {
          vote.setText(tmp.getVote());
          besch.setText(tmp.getBeschreibung());
          dat.setText(tmp.getDate());
+         String pfad = MainActivity.URL_PICTURES+tmp.getPath();
+
+        Picasso.get().load(pfad).into(link);
     }
 }

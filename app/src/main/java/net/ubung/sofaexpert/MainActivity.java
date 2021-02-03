@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     List<Film> movies = new ArrayList<>();
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         loadPictFromJSON();
         gridView = (GridView) findViewById(R.id.gridview);
         bindAdapterToListView(gridView);
-
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     private void loadPictFromJSON(){
         try {
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 String path = results.getJSONObject(i).getString("poster_path");
                 String beschreibung = results.getJSONObject(i).getString("overview");
                 String date = results.getJSONObject(i).getString("release_date");
+                path= path.replace("/","");
                 Film mov = new Film(name, vote, path, beschreibung, date);
                 movies.add(mov);
 

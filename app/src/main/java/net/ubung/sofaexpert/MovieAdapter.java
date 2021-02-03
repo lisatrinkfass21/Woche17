@@ -42,13 +42,11 @@ public class MovieAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        System.out.println("start downloading");
         String url = MainActivity.URL_PICTURES+movies.get(position).getPath();
         View listItem = (convertView == null)?
                 inflater.inflate(this.gridViewItemId,null) : convertView;
         ImageView iv = (ImageView) listItem.findViewById(R.id.icon);
         Picasso.get().load(url).into(iv);
-        System.out.println("downloaded");
         return listItem;
     }
 }
