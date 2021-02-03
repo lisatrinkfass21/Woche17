@@ -2,9 +2,13 @@ package net.ubung.sofaexpert;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Movie;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import org.json.JSONArray;
@@ -20,6 +24,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+
     GridView gridView;
     static String URL_PICTURES = "http://image.tmdb.org/t/p/w154/";
     MovieAdapter mva;
@@ -33,9 +38,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         loadPictFromJSON();
         gridView = (GridView) findViewById(R.id.gridview);
         bindAdapterToListView(gridView);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                intent.putExtra("Film",movies.get(position).toString());
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -55,12 +70,13 @@ public class MainActivity extends AppCompatActivity {
 
             for (int i = 0; i < results.length(); i++) {
                 String name = results.getJSONObject(i).getString("title");
-                String vote = results.getJSONObject(i).getString("vote");
+                String vote = results.getJSONObject(i).getString("vote_average");
                 String path = results.getJSONObject(i).getString("poster_path");
                 String beschreibung = results.getJSONObject(i).getString("overview");
                 String date = results.getJSONObject(i).getString("release_date");
                 Film mov = new Film(name, vote, path, beschreibung, date);
                 movies.add(mov);
+
             }
 
         } catch (JSONException e) {
