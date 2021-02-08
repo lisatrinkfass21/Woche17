@@ -21,13 +21,14 @@ public class DetailActivity extends AppCompatActivity {
          TextView besch = findViewById(R.id.movieBesch);
          TextView dat = findViewById(R.id.movieDate);
          ImageView link = findViewById(R.id.movieImage);
+
          Intent in  = getIntent();
-         Film tmp = Film.filmOfString(in.getStringExtra("Film"));
-         name.setText(tmp.getName());
-         vote.setText(tmp.getVote());
-         besch.setText(tmp.getBeschreibung());
-         dat.setText(tmp.getDate());
-         String pfad = MainActivity.URL_PICTURES+tmp.getPath();
+         name.setText(in.getStringExtra("name"));
+         vote.setText(in.getStringExtra("vote") + " / 10");
+        dat.setText(in.getStringExtra("date"));
+         besch.setText(in.getStringExtra("besch"));
+
+         String pfad = MainActivity.URL_PICTURES+in.getStringExtra("path");
 
         Picasso.get().load(pfad).into(link);
     }
