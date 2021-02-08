@@ -53,13 +53,13 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void loadAll() {
-        // ProgressDialog pd = new ProgressDialog(this);
-        // pd.setMessage("loading.....");
-        //pd.show();
+         ProgressDialog pd = new ProgressDialog(this);
+         pd.setMessage("loading.....");
+        pd.show();
         loadPictFromJSON();
         gridView = (GridView) findViewById(R.id.gridview);
         bindAdapterToListView(gridView);
-        //pd.dismiss();
+        pd.dismiss();
     }
 
 
